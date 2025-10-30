@@ -486,3 +486,15 @@ function get_resource_model(NovaRequest $request, Resource $resource = null) {
     return is_subclass_of($request->resource, '\Illuminate\Database\Eloquent\Model') ? $request->resource : $request->findModel($request->resourceId);
 
 }
+
+function set_readonly_field($field) {
+
+    if (method_exists($field, 'fillUsing')) {
+
+        $field->fillUsing(function () { });
+
+    }
+    
+    return $field;
+
+}
