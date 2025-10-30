@@ -489,6 +489,12 @@ function get_resource_model(NovaRequest $request, Resource $resource = null) {
 
 function set_readonly_field($field) {
 
+    $field->withMeta([
+        'extraAttributes' => [
+            'readonly' => true,
+        ],
+    ]);
+
     if (method_exists($field, 'fillUsing')) {
 
         $field->fillUsing(function () { });
