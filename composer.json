@@ -25,6 +25,9 @@
          "Patrn1\\NovaFieldsHelpers\\":"src/"
       }
    },
+  "files": [
+    "src/index.php"
+  ],
    "scripts":{
       "post-autoload-dump":[
          
