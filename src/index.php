@@ -509,11 +509,15 @@ function set_readonly_field($field) {
 
     }
 
-    $field->withMeta([
-        'extraAttributes' => [
-            'readonly' => true,
-        ],
-    ]);
+    if (method_exists($field, 'withMeta')) {
+
+        $field->withMeta([
+            'extraAttributes' => [
+                'readonly' => true,
+            ],
+        ]);
+
+    }
 
     if (method_exists($field, 'fillUsing')) {
 
