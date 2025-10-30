@@ -16,6 +16,7 @@ use Chaseconey\ExternalImage\ExternalImage;
 use ZiffMedia\NovaSelectPlus\SelectPlus;
 use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
+use Illuminate\Support\Collection;
 
 function get_autocomplete_field(string $name, string $attribute, $configure = null) {
 
@@ -488,6 +489,18 @@ function get_resource_model(NovaRequest $request, Resource $resource = null) {
 }
 
 function set_readonly_field($field) {
+
+    if ($field->repeatables instanceof Collection) {
+
+        $field->repeatables->each(fn($rpt) => set_readonly_field($rpt));
+
+    }
+
+    if ($field->fields instanceof Collection) {
+
+        $field->fields->each(fn($fld) => set_readonly_field($fld));
+
+    }
 
     $field->withMeta([
         'extraAttributes' => [
