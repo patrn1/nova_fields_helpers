@@ -1,0 +1,68 @@
+{
+   "$schema":"https://getcomposer.org/schema.json",
+   "name":"patrn1/nova_filds_helpers",
+   "type":"project",
+   "description":"",
+   "keywords":[
+      "laravel",
+      "nova",
+      "nova 5"
+   ],
+   "license":"MIT",
+   "require":{
+      "php":"^8.2"
+   },
+   "require-dev":{
+      
+   },
+   "autoload":{
+      "psr-4":{
+         "Patrn1\\NovaFieldsHelpers":"src/"
+      }
+   },
+   "autoload-dev":{
+      "psr-4":{
+         "Patrn1\\NovaFieldsHelpers":"src/"
+      }
+   },
+   "scripts":{
+      "post-autoload-dump":[
+         
+      ],
+      "post-update-cmd":[
+         
+      ],
+      "post-root-package-install":[
+         
+      ],
+      "post-create-project-cmd":[
+         
+      ],
+      "dev":[
+         
+      ]
+   },
+   "extra":{
+      "laravel":{
+         "dont-discover":[
+            
+         ]
+      }
+   },
+   "config":{
+      "optimize-autoloader":true,
+      "preferred-install":"dist",
+      "sort-packages":true,
+      "allow-plugins":{ 
+      }
+   },
+   "minimum-stability":"stable",
+   "prefer-stable":true,
+   "repositories":[
+      {
+         "type":"vcs",
+        # "url":"https://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@github.com/patrn1/nova_filds_helpers.git"
+         "url": "https://github.com/patrn1/nova_filds_helpers.git"
+      }
+   ]
+}
