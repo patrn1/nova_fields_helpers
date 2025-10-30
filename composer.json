@@ -58,10 +58,5 @@
    },
    "minimum-stability":"stable",
    "prefer-stable":true,
-   "repositories":[
-      {
-         "type":"vcs",
-         "url":"https://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@github.com/patrn1/nova_filds_helpers.git"
-      }
    ]
 }
