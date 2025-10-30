@@ -490,15 +490,22 @@ function get_resource_model(NovaRequest $request, Resource $resource = null) {
 
 function set_readonly_field($field) {
 
-    if ($field->repeatables instanceof Collection) {
-
-        $field->repeatables->each(fn($rpt) => set_readonly_field($rpt));
-
+    if (isset($field->repeatables)) {
+        
+        if ($field->repeatables instanceof Collection) {
+    
+            $field->repeatables->each(fn($rpt) => set_readonly_field($rpt));
+    
+        }
     }
 
-    if ($field->fields instanceof Collection) {
+    if (isset($field->fields)) {
 
-        $field->fields->each(fn($fld) => set_readonly_field($fld));
+        if ($field->fields instanceof Collection) {
+    
+            $field->fields->each(fn($fld) => set_readonly_field($fld));
+    
+        }
 
     }
 
