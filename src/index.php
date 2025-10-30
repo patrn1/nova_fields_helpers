@@ -1,5 +1,7 @@
 <?php
 
+namespace Patrn1\NovaFieldsHelpers;
+
 use Illuminate\Support\Facades\Schema;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Outl1ne\MultiselectField\Multiselect;
