@@ -18,16 +18,19 @@
    "autoload":{
       "psr-4":{
          "Patrn1\\NovaFieldsHelpers\\":"src/"
-      }
+      },
+     "files": [
+       "src/index.php"
+     ]
    },
    "autoload-dev":{
       "psr-4":{
          "Patrn1\\NovaFieldsHelpers\\":"src/"
-      }
+      },
+     "files": [
+       "src/index.php"
+     ]
    },
-  "files": [
-    "src/index.php"
-  ],
    "scripts":{
       "post-autoload-dump":[
          
