@@ -18,6 +18,13 @@ use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
+function make_field_fit_content($field) {
+    
+    return $field->withMeta(['extraAttributes' => [
+        'style' => 'height:auto;min-height:100px;overflow:hidden;'
+    ]]);
+}
+
 function get_autocomplete_field(string $name, string $attribute, $configure = null) {
 
     $oldValueAttrName = "{$attribute}_old";
