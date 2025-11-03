@@ -18,6 +18,22 @@ use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
+function hide_group_if($groupField, $cb) {
+
+    $continer = $groupField->data ?? $groupField->fields;
+    
+    foreach ($continer as $field) {
+
+        $field->canSee(function (NovaRequest $request) use ($cb) {
+
+            return !$cb( $request );
+
+        });
+    }
+
+    return $continer;
+}
+
 function make_field_fit_content($field) {
     
     return $field->withMeta(['extraAttributes' => [
