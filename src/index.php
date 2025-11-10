@@ -42,7 +42,7 @@ function hide_group_if($groupField, $cb) {
         });
     });
 
-    return $continer;
+    return $groupField;
 }
 
 function make_field_fit_content($field) {
