@@ -18,18 +18,29 @@ use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
-function hide_group_if($groupField, $cb) {
+
+function change_group($groupField, $cb) {
 
     $continer = $groupField->data ?? $groupField->fields;
     
     foreach ($continer as $field) {
 
-        $field->canSee(function (NovaRequest $request) use ($cb) {
+        $cb( $field );
+    }
+
+    return $continer;
+}
+
+function hide_group_if($groupField, $cb) {
+
+    change_group($groupField, function($field) use ($cb) {
+
+        return $field->canSee(function (NovaRequest $request) use ($cb) {
 
             return !$cb( $request );
 
         });
-    }
+    });
 
     return $continer;
 }
