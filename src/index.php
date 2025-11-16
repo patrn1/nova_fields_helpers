@@ -18,6 +18,21 @@ use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
+function show_field(field) {
+
+    return field
+        
+        ->showOnIndex()
+        
+        ->showOnDetail()
+        
+        ->showOnCreating()
+        
+        ->showOnUpdating()
+        
+        ->canSee(fn() => true);
+
+}
 
 function change_group($groupField, $cb) {
 
