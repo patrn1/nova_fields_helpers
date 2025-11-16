@@ -20,7 +20,7 @@ use Illuminate\Support\Collection;
 
 function show_field($field) {
 
-    return field
+    return $field
         
         ->showOnIndex()
         
