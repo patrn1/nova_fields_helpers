@@ -18,7 +18,7 @@ use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
-function show_field(field) {
+function show_field($field) {
 
     return field
         
