@@ -189,6 +189,14 @@ function get_raw_password_field($name, $modelAttribute) {
         });
 }
 
+function get_resource_field_options($resource, $modelAttribute) {
+
+    $field = get_resource_field($resource, $modelAttribute);
+
+    return $field?->optionsCallback;
+    
+}
+
 function get_resource_field($resource, $modelAttribute) {
 
     $request = new \Laravel\Nova\Http\Requests\NovaRequest;
