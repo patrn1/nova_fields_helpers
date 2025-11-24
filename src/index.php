@@ -20,7 +20,7 @@ use Illuminate\Support\Collection;
 
 function rus_datetime_format($datetime) {
     
-    return $datetime->format('h:m d.m.Y');
+    return $datetime?->format('h:m d.m.Y');
 
 }
 
