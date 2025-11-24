@@ -18,6 +18,12 @@ use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
+function rus_datetime_format($datetime) {
+    
+    return $datetime->format('h:m d.m.Y');
+
+}
+
 function show_field($field) {
 
     return $field
