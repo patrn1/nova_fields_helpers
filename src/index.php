@@ -19,6 +19,12 @@ use Laravel\Nova\Resource;
 use Illuminate\Support\Collection;
 
 function rus_datetime_format($datetime) {
+
+    if (is_string($datetime)) {
+
+        $datetime = \Carbon\Carbon::parse( $datetime );
+        
+    }
     
     return $datetime?->format('h:m d.m.Y');
 
