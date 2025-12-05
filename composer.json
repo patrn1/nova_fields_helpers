@@ -15,12 +15,12 @@
    },
    "autoload":{
       "psr-4":{
-         "Patrn1\\NovaFieldsHelpers":"src/"
+         "Patrn1\\NovaFieldsHelpers\\":"src/"
       }
    },
    "autoload-dev":{
       "psr-4":{
-         "Patrn1\\NovaFieldsHelpers":"src/"
+         "Patrn1\\NovaFieldsHelpers\\":"src/"
       }
    },
    "scripts":{
