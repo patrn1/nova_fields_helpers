@@ -16,6 +16,68 @@ use Chaseconey\ExternalImage\ExternalImage;
 use ZiffMedia\NovaSelectPlus\SelectPlus;
 use Armincms\Fields\BelongsToMany;
 use Laravel\Nova\Resource;
+use Illuminate\Support\Collection;
+
+function rus_datetime_format($datetime) {
+
+    if (is_string($datetime)) {
+
+        $datetime = \Carbon\Carbon::parse( $datetime );
+        
+    }
+    
+    return $datetime?->format('h:m d.m.Y');
+
+}
+
+function show_field($field) {
+
+    return $field
+        
+        ->showOnIndex()
+        
+        ->showOnDetail()
+        
+        ->showOnCreating()
+        
+        ->showOnUpdating()
+        
+        ->canSee(fn() => true);
+
+}
+
+function change_group($groupField, $cb) {
+
+    $continer = $groupField->data ?? $groupField->fields;
+    
+    foreach ($continer as $field) {
+
+        $cb( $field );
+    }
+
+    return $continer;
+}
+
+function hide_group_if($groupField, $cb) {
+
+    change_group($groupField, function($field) use ($cb) {
+
+        return $field->canSee(function (NovaRequest $request) use ($cb) {
+
+            return !$cb( $request );
+
+        });
+    });
+
+    return $groupField;
+}
+
+function make_field_fit_content($field) {
+    
+    return $field->withMeta(['extraAttributes' => [
+        'style' => 'height:auto;min-height:100px;overflow:hidden;'
+    ]]);
+}
 
 function get_autocomplete_field(string $name, string $attribute, $configure = null) {
 
@@ -131,6 +193,14 @@ function get_raw_password_field($name, $modelAttribute) {
 
             $model->{$attribute} = $request->input($requestAttribute);
         });
+}
+
+function get_resource_field_options($resource, $modelAttribute) {
+
+    $field = get_resource_field($resource, $modelAttribute);
+
+    return $field?->optionsCallback;
+    
 }
 
 function get_resource_field($resource, $modelAttribute) {
@@ -484,5 +554,46 @@ function get_resource_model(NovaRequest $request, Resource $resource = null) {
     }
 
     return is_subclass_of($request->resource, '\Illuminate\Database\Eloquent\Model') ? $request->resource : $request->findModel($request->resourceId);
+
+}
+
+function set_readonly_field($field) {
+
+    if (isset($field->repeatables)) {
+        
+        if ($field->repeatables instanceof Collection) {
+    
+            $field->repeatables->each(fn($rpt) => set_readonly_field($rpt));
+    
+        }
+    }
+
+    if (isset($field->fields)) {
+
+        if ($field->fields instanceof Collection) {
+    
+            $field->fields->each(fn($fld) => set_readonly_field($fld));
+    
+        }
+
+    }
+
+    if (method_exists($field, 'withMeta')) {
+
+        $field->withMeta([
+            'extraAttributes' => [
+                'readonly' => true,
+            ],
+        ]);
+
+    }
+
+    if (method_exists($field, 'fillUsing')) {
+
+        $field->fillUsing(function () { });
+
+    }
+    
+    return $field;
 
 }
