@@ -32,27 +32,21 @@ function rus_datetime_format($datetime) {
 
 function show_field($field) {
 
-    if (method_exists($field, 'showOnIndex')) {
-        $field->showOnIndex();
+    if (!is_a($field, \Laravel\Nova\Fields\Textarea::class)) {
+
+        return $field->showOnIndex();
+
     }
 
-    if (method_exists($field, 'showOnDetail')) {
-        $field->showOnDetail();
-    }
-
-    if (method_exists($field, 'showOnCreating')) {
-        $field->showOnCreating();
-    }
-
-    if (method_exists($field, 'showOnUpdating')) {
-        $field->showOnUpdating();
-    }
-
-    if (method_exists($field, 'canSee')) {
-        $field->canSee(fn() => true);
-    }
-
-    return $field;
+    return $field
+        
+        ->showOnDetail()
+        
+        ->showOnCreating()
+        
+        ->showOnUpdating()
+        
+        ->canSee(fn() => true);
 
 }
 
