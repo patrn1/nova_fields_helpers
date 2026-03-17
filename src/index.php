@@ -44,17 +44,19 @@ function show_field($field) {
 
     if (!is_a($field, \Laravel\Nova\Panel::class)) {
     
-        return $field->showOnDetail();
+        return $field
+
+            ->showOnDetail()
+        
+            ->showOnCreating()
+          
+            ->showOnUpdating()
+        
+            ->canSee(fn() => true);
 
     }
 
-    return $field
-        
-        ->showOnCreating()
-        
-        ->showOnUpdating()
-        
-        ->canSee(fn() => true);
+    return $field;
 
 }
 
