@@ -34,7 +34,11 @@ function show_field($field) {
 
     if (!is_a($field, \Laravel\Nova\Fields\Textarea::class)) {
 
-        return $field->showOnIndex();
+        if (!is_a($field, \Laravel\Nova\Panel::class)) {
+        
+            return $field->showOnIndex();
+
+        }
 
     }
 
